@@ -6,6 +6,9 @@ import cv2
 import numpy as np
 import os
 
+# Must be first Streamlit command
+st.set_page_config(page_title="Osteoarthritis", layout="centered")
+
 # Define label dictionary
 dic = {0: 'Grade 0 : Normal', 1: 'Grade 1 : Doubtful', 2: 'Grade 2 : Mild', 3: 'Grade 3 : Moderate', 4: 'Grade 4 : Severe'}
 
@@ -34,9 +37,7 @@ def predict_label(img_array):
     p = np.argmax(model.predict(i), axis=-1)
     return dic[p[0]]
 
-# Streamlit app
-st.set_page_config(page_title="Osteoarthritis", layout="centered")
-
+# Streamlit UI
 st.title("Diagnosis for the Prediction of Knee Osteoarthritis Using Deep Learning")
 st.write("Choose your Knee X-Ray file and click Predict to get your diagnosis.")
 
