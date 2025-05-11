@@ -11,11 +11,8 @@ dic = {0: 'Grade 0 : Normal', 1: 'Grade 1 : Doubtful', 2: 'Grade 2 : Mild', 3: '
 # Image size
 img_size = 256
 
-# Set the filepath variable
-filepath = 'model2.keras'  # Path to your model file
-
-# Load model using the filepath
-model = load_model(filepath)
+# Load model
+model = load_model('model2.keras')
 
 # Define predict function
 def predict_label(img_array):
