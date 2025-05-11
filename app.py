@@ -12,7 +12,7 @@ dic = {0: 'Grade 0 : Normal', 1: 'Grade 1 : Doubtful', 2: 'Grade 2 : Mild', 3: '
 img_size = 256
 
 # Load model
-model = load_model('model2.keras')
+model = load_model('model.h5')
 
 # Define predict function
 def predict_label(img_array):
