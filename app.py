@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 from keras.models import load_model
 from keras.preprocessing import image
 import cv2
@@ -11,8 +12,18 @@ dic = {0: 'Grade 0 : Normal', 1: 'Grade 1 : Doubtful', 2: 'Grade 2 : Mild', 3: '
 # Image size
 img_size = 256
 
+# Download the model if not already downloaded
+MODEL_URL = "https://huggingface.co/SPPramod/model2.keras/resolve/main/model2.keras"
+MODEL_PATH = "model.keras"
+
+if not os.path.exists(MODEL_PATH):
+    with st.spinner("Downloading model..."):
+        r = requests.get(MODEL_URL)
+        with open(MODEL_PATH, 'wb') as f:
+            f.write(r.content)
+
 # Load model
-model = load_model('model.h5')
+model = load_model(MODEL_PATH)
 
 # Define predict function
 def predict_label(img_array):
@@ -27,21 +38,16 @@ def predict_label(img_array):
 st.set_page_config(page_title="Osteoarthritis", layout="centered")
 
 st.title("Diagnosis for the Prediction of Knee Osteoarthritis Using Deep Learning")
-st.write("Diagnosis for the Prediction of Knee Osteoarthritis Using Deep Learning. Choose your Knee X-Ray visual file and click Predict to get your diagnosis.")
-st.write("Upload an image and get the prediction.")
+st.write("Choose your Knee X-Ray file and click Predict to get your diagnosis.")
 
 # File uploader
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # Save the uploaded file to a temporary location
     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
     img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
-    
-    # Show the uploaded image
     st.image(img, channels="BGR", caption="Uploaded Image", use_container_width=True)
 
-    # Predict button
     if st.button("Predict"):
         prediction = predict_label(img)
         st.success(f"Prediction: **{prediction}**")
