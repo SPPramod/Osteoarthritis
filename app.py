@@ -17,7 +17,7 @@ img_size = 256
 
 # Download the model if not already downloaded
 MODEL_URL = "https://huggingface.co/SPPramod/model2.keras/resolve/main/model2.keras"
-MODEL_PATH = "model2.keras"
+MODEL_PATH = "model.keras"
 
 if not os.path.exists(MODEL_PATH):
     with st.spinner("Downloading model..."):
