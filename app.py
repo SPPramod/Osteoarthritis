@@ -5,7 +5,6 @@ from keras.preprocessing import image
 import cv2
 import numpy as np
 import os
-import matplotlib.pyplot as plt
 
 # Must be first Streamlit command
 st.set_page_config(page_title="Osteoarthritis", layout="centered")
@@ -51,13 +50,5 @@ if uploaded_file is not None:
     st.image(img, channels="BGR", caption="Uploaded Image", use_container_width=True)
 
     if st.button("Predict"):
-        label_index, prediction_text, processed_img = predict_label(img)
+        prediction_text = predict_label(img)
         st.success(f"Prediction: **{prediction_text}**")
-
-        # Create subplot-like visualization
-        fig, ax = plt.subplots(figsize=(4, 3))  # Width x Height
-        ax.imshow(processed_img, cmap='viridis', aspect='auto')
-        ax.set_title(prediction_text, fontsize=8, weight='bold', pad=10)
-        ax.axis('off')
-
-        st.pyplot(fig)
