@@ -5,6 +5,7 @@ from keras.preprocessing import image
 import cv2
 import numpy as np
 import os
+import matplotlib.pyplot as plt
 
 # Must be first Streamlit command
 st.set_page_config(page_title="Osteoarthritis", layout="centered")
