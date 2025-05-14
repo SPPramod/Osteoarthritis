@@ -50,7 +50,8 @@ if uploaded_file is not None:
     st.image(img, channels="BGR", caption="Uploaded Image", use_container_width=True)
 
     if st.button("Predict"):
-        prediction_text, processed_img = predict_label(img)
+        prediction_text = predict_label(img)
+        processed_img = predict_label(img)
         st.success(f"Prediction: **{prediction_text}**")
 
         # Create subplot-like visualization
